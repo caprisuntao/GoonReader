@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark, warm-brown window background so launch never flashes white.
+         Kept in sync with the Compose background colour (ui/theme/Color.kt). -->
+    <color name="window_background">#FF17100C</color>
+</resources>

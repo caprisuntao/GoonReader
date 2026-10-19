@@ -1,0 +1,23 @@
+package app.goonreader
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import app.goonreader.ui.navigation.GoonReaderApp
+import app.goonreader.ui.theme.GoonReaderTheme
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
+        super.onCreate(savedInstanceState)
+        setContent {
+            GoonReaderTheme {
+                GoonReaderApp()
+            }
+        }
+    }
+}
