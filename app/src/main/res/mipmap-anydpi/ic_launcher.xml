@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  The launcher art is a single full-bleed image: the character portrait on the same warm paper
+  colour as the drawing, so any mask (circle, squircle, rounded square) only ever cuts background.
+-->
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
-    <background android:drawable="@drawable/ic_launcher_background" />
-    <foreground android:drawable="@drawable/ic_launcher_foreground" />
-    <monochrome android:drawable="@drawable/ic_launcher_foreground" />
+    <background android:drawable="@mipmap/ic_launcher_background" />
 </adaptive-icon>

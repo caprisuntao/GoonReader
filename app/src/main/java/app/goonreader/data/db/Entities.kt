@@ -44,6 +44,12 @@ data class WorkEntity(
     val addedAt: Long = 0L,
     /** Last time an update check looked at this work; used to skip recently checked ones. */
     val lastCheckedAt: Long? = null,
+    // PRD 8 leaves engagement stats out of the work row, but PRD 9.6 shows them in the header.
+    // They are cheap to keep and never used for sorting, so they live on the work.
+    val kudos: Int? = null,
+    val hits: Long? = null,
+    val bookmarks: Int? = null,
+    val commentCount: Int? = null,
 )
 
 @Entity(
@@ -124,4 +130,31 @@ data class HistoryEntity(
     val chapterId: String,
     val lastReadAt: Long,
     val readDurationMs: Long = 0L,
+)
+
+/**
+ * A saved reading position (PRD 10.9). Chapter number and title are copied in so the list reads
+ * without a join; the bookmark follows the work when it is removed from the library.
+ */
+@Entity(
+    tableName = "bookmarks",
+    foreignKeys = [
+        ForeignKey(
+            entity = WorkEntity::class,
+            parentColumns = ["id"],
+            childColumns = ["workId"],
+            onDelete = ForeignKey.CASCADE,
+        ),
+    ],
+    indices = [Index("workId")],
+)
+data class BookmarkEntity(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0L,
+    val workId: String,
+    val chapterId: String,
+    val chapterNumber: Int,
+    val chapterTitle: String,
+    /** 0f..1f position inside the chapter. */
+    val progress: Float,
+    val createdAt: Long,
 )

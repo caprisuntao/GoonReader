@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a1a64d59d77f454d0ec4375baaa863db",
+    "identityHash": "5a5327be1666c7b4533ddeb099504679",
     "entities": [
       {
         "tableName": "works",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `authors` TEXT NOT NULL, `fandoms` TEXT NOT NULL, `rating` TEXT NOT NULL, `warnings` TEXT NOT NULL, `categories` TEXT NOT NULL, `relationships` TEXT NOT NULL, `characters` TEXT NOT NULL, `tags` TEXT NOT NULL, `summary` TEXT NOT NULL, `language` TEXT NOT NULL, `wordCount` INTEGER NOT NULL, `chaptersPublished` INTEGER NOT NULL, `chaptersTotal` INTEGER, `isComplete` INTEGER NOT NULL, `publishedAt` INTEGER, `updatedAt` INTEGER, `inLibrary` INTEGER NOT NULL, `addedAt` INTEGER NOT NULL, `lastCheckedAt` INTEGER, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `authors` TEXT NOT NULL, `fandoms` TEXT NOT NULL, `rating` TEXT NOT NULL, `warnings` TEXT NOT NULL, `categories` TEXT NOT NULL, `relationships` TEXT NOT NULL, `characters` TEXT NOT NULL, `tags` TEXT NOT NULL, `summary` TEXT NOT NULL, `language` TEXT NOT NULL, `wordCount` INTEGER NOT NULL, `chaptersPublished` INTEGER NOT NULL, `chaptersTotal` INTEGER, `isComplete` INTEGER NOT NULL, `publishedAt` INTEGER, `updatedAt` INTEGER, `inLibrary` INTEGER NOT NULL, `addedAt` INTEGER NOT NULL, `lastCheckedAt` INTEGER, `kudos` INTEGER, `hits` INTEGER, `bookmarks` INTEGER, `commentCount` INTEGER, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -128,6 +128,26 @@
           {
             "fieldPath": "lastCheckedAt",
             "columnName": "lastCheckedAt",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "kudos",
+            "columnName": "kudos",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "hits",
+            "columnName": "hits",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "bookmarks",
+            "columnName": "bookmarks",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "commentCount",
+            "columnName": "commentCount",
             "affinity": "INTEGER"
           }
         ],
@@ -425,7 +445,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a1a64d59d77f454d0ec4375baaa863db')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5a5327be1666c7b4533ddeb099504679')"
     ]
   }
 }

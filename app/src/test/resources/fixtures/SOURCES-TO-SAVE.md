@@ -62,3 +62,21 @@ If saving all twelve is tedious, `01`, `04`, `05`, `06` and `08` let me write an
   exactly which selectors broke.
 - Once populated, `tools/capture-fixtures.ps1` becomes the refresh path; it writes its own
   `README.md` index of URLs, dates and byte counts.
+
+## M4 pages (captured automatically)
+
+`13`, `14` and `15` were captured by the app itself rather than by hand: a temporary intent hook
+in `MainActivity` fetched each URL through `Ao3Client` (OkHttp first, the hidden WebView fallback
+when Cloudflare challenges) and wrote the returned HTML to the app cache, which `adb exec-out
+run-as` then copied out. The hook is gone; if these pages ever need recapturing, restore it and
+run:
+
+| # | Save as | URL |
+|---|---|---|
+| 13 | `13-search-form.html` | `/works/search?edit_search=true` |
+| 14 | `14-tag-search.html` | `/tags/search?tag_search[name]=time travel` |
+| 15 | `15-tag-works.html` | `/tags/Harry Potter - J*d* K*d* Rowling/works` |
+
+`15` only resolves with AO3's own escapes in it. The unescaped form
+(`/tags/Harry%20Potter%20-%20J.%20K.%20Rowling/works`) returns a 404, which is the whole reason the
+app copies tag `href`s out of parsed pages instead of building them.

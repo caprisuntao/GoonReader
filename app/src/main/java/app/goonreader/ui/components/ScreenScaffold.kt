@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
 /**
@@ -24,6 +25,7 @@ import androidx.compose.ui.unit.dp
 fun ScreenScaffold(
     title: String,
     modifier: Modifier = Modifier,
+    navigationIcon: (@Composable () -> Unit)? = null,
     actions: @Composable RowScope.() -> Unit = {},
     content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -31,14 +33,24 @@ fun ScreenScaffold(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 20.dp, end = 12.dp, top = 14.dp, bottom = 10.dp),
+                .padding(
+                    start = if (navigationIcon == null) 20.dp else 4.dp,
+                    end = 12.dp,
+                    top = 14.dp,
+                    bottom = 10.dp,
+                ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
+            navigationIcon?.invoke()
             Text(
                 text = title,
                 style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.weight(1f),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = if (navigationIcon == null) 0.dp else 4.dp),
             )
             Row(
                 verticalAlignment = Alignment.CenterVertically,
